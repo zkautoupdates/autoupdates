@@ -1,4 +1,4 @@
-name: Update Player Data
+name: Update Line Data
 
 on:
   # Allow manual trigger
@@ -24,7 +24,7 @@ jobs:
         with:
           packages: |
             any::tidyverse
-            any::jsonlite
+            any::glue
 
       - name: Check out repository
         uses: actions/checkout@v3
@@ -32,12 +32,15 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Import data
-        run: Rscript -e 'source("player_data_info.R")'
+        run: Rscript -e 'source("line_data.R")'
         
       - name: Commit Results
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add data/player_data.rds
+          git add data/f_lines.rds
+          git add data/d_pairs.rds
+          git add data/qot.rds
+          git add data/qoc.rds
           git commit -m 'Data updated' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
