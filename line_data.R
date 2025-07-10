@@ -136,7 +136,6 @@ player_toi <- function(pbp){
 `%not_in%` <- Negate(`%in%`)
 
 pbp <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_24_25.rds"))
-pbp <- pbp %>% filter(game_id == 2024020001)
 player_info <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/player_data.rds"))
 player_stats_24_25 <- readRDS(url("https://github.com/zkautoupdates/autoupdates/raw/main/data/player_stats_24_25.rds"))
 
