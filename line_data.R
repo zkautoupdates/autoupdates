@@ -263,7 +263,7 @@ qot <- qot %>%
   group_by(playerID=player1) %>%
   summarize(QOT = sum(teammate_strength),.groups = "drop") %>%
   left_join(player_info %>% select(playerID,full_name,position,team),by="playerID") %>%
-  select(full_name,position,team,QOT) %>%
+  select(playerID,full_name,position,team,QOT) %>%
   arrange(-QOT)
 
 # QOC #
@@ -294,11 +294,11 @@ qoc <- qoc %>%
   group_by(playerID=player1) %>%
   summarize(QOC = sum(opp_strength),.groups = "drop") %>%
   left_join(player_info %>% select(playerID,full_name,position,team),by="playerID") %>%
-  select(full_name,position,team,QOC) %>%
+  select(playerID,full_name,position,team,QOC) %>%
   arrange(-QOC)
 
 # Save data
 f_lines %>% saveRDS("data/f_lines_24_25.rds")
 d_pairs %>% saveRDS("data/d_pairs_24_25.rds")
-qot %>% saveRDS("data/qot_24_25.rds")
-qoc %>% saveRDS("data/qoc_24_25.rds")
+qotc <- left_join(qot,qoc,by="playerID")
+qotc %>% saveRDS("data/qotc_24_25.rds")
