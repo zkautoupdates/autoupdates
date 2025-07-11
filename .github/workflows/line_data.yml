@@ -38,9 +38,8 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add data/f_lines.rds
-          git add data/d_pairs.rds
-          git add data/qot.rds
-          git add data/qoc.rds
+          git add data/f_lines_24_25.rds
+          git add data/d_pairs_24_25.rds
+          git add data/qotc_24_25.rds
           git commit -m 'Data updated' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
