@@ -294,7 +294,7 @@ qoc <- qoc %>%
   group_by(playerID=player1) %>%
   summarize(QOC = sum(opp_strength),.groups = "drop") %>%
   left_join(player_info %>% select(playerID,full_name,position,team),by="playerID") %>%
-  select(playerID,full_name,position,team,QOC) %>%
+  select(playerID,QOC) %>%
   arrange(-QOC)
 
 # Save data
