@@ -441,6 +441,13 @@ rapm <- function(pbp,game_strength){
   rm(RAPM_CF)
   
   rm(shifts_combined_dummies,subsetted_dummies)
+  
+  n_cores <- parallel::detectCores() - 1
+  print(glue("NUMBER OF CORES USED: ",n_cores,sep=" "))
+  cl <- makeCluster(n_cores)
+  registerDoParallel(cl)
+  getDoParWorkers()
+  
   Cross_Validated_Results_xGF <- cv.glmnet(x=Sparse_RAPM_xGF, y=xGF60, weights=shift_length, alpha=0, nfolds=10, standardize=FALSE, parallel=TRUE)
   Cross_Validated_Results_GF <- cv.glmnet(x=Sparse_RAPM_GF, y=GF60, weights=shift_length, alpha=0, nfolds=10, standardize=FALSE, parallel=TRUE)
   Cross_Validated_Results_CF <- cv.glmnet(x=Sparse_RAPM_CF, y=CF60, weights=shift_length, alpha=0, nfolds=10, standardize=FALSE, parallel=TRUE)
@@ -448,6 +455,9 @@ rapm <- function(pbp,game_strength){
   Run_RAPM_xGF <- glmnet(x=Sparse_RAPM_xGF, y=xGF60, weights=shift_length, lambda = Cross_Validated_Results_xGF[["lambda.min"]], alpha=0, nfolds=10, standardize=FALSE, parallel=TRUE)
   Run_RAPM_GF <- glmnet(x=Sparse_RAPM_GF, y=GF60, weights=shift_length, lambda = Cross_Validated_Results_xGF[["lambda.min"]], alpha=0, nfolds=10, standardize=FALSE, parallel=TRUE)
   Run_RAPM_CF <- glmnet(x=Sparse_RAPM_CF, y=CF60, weights=shift_length, lambda = Cross_Validated_Results_xGF[["lambda.min"]], alpha=0, nfolds=10, standardize=FALSE, parallel=TRUE)
+  
+  stopCluster(cl)
+  registerDoSEQ()
   
   RAPM_xGF_coefficients <- as.data.frame(as.matrix(coef(Run_RAPM_xGF)))
   RAPM_GF_coefficients <- as.data.frame(as.matrix(coef(Run_RAPM_GF)))
