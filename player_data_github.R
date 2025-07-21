@@ -400,9 +400,11 @@ rapm <- function(pbp,game_strength){
   cl <- makeCluster(n_cores)
   registerDoParallel(cl)
   getDoParWorkers()
-  
+
+  print("Shifts_subset")
   shifts_subset = subset(shifts_combined, select = c(offense_1:offense_6,defense_1:defense_6,shift_length,State_4v4,State_3v3,Up_1:Down_3,xGF_60,GF_60,CF_60,is_home))
-  
+
+  print("Shifts_combined_dummies")
   shifts_combined_dummies_off <- dummy_cols(shifts_subset, select_columns = c("offense_1","offense_2","offense_3","offense_4","offense_5","offense_6"))
   shifts_combined_dummies_def <- dummy_cols(shifts_subset, select_columns = c("defense_1","defense_2","defense_3","defense_4","defense_5","defense_6"))
   shifts_combined_dummies_off = subset(shifts_combined_dummies_off, select = -c(offense_1,offense_2,offense_3,offense_4,offense_5,offense_6,defense_1,defense_2,defense_3,defense_4,defense_5,defense_6))
@@ -447,7 +449,8 @@ rapm <- function(pbp,game_strength){
   rm(RAPM_CF)
   
   rm(shifts_combined_dummies,subsetted_dummies)
-  
+
+  print("glmnet")
   Cross_Validated_Results_xGF <- cv.glmnet(x=Sparse_RAPM_xGF, y=xGF60, weights=shift_length, alpha=0, nfolds=10, standardize=FALSE, parallel=TRUE)
   Cross_Validated_Results_GF <- cv.glmnet(x=Sparse_RAPM_GF, y=GF60, weights=shift_length, alpha=0, nfolds=10, standardize=FALSE, parallel=TRUE)
   Cross_Validated_Results_CF <- cv.glmnet(x=Sparse_RAPM_CF, y=CF60, weights=shift_length, alpha=0, nfolds=10, standardize=FALSE, parallel=TRUE)
