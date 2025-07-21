@@ -395,7 +395,7 @@ rapm <- function(pbp,game_strength){
   shifts_combined <- full_join(home_as_off, away_as_off)
   rm(pbp_ev,home_as_off,away_as_off,grouped_shifts)
   
-  n_cores <- parallel::detectCores() - 1
+  n_cores <- parallel::detectCores()
   print(glue("NUMBER OF CORES USED: ",n_cores,sep=" "))
   cl <- makeCluster(n_cores)
   registerDoParallel(cl)
