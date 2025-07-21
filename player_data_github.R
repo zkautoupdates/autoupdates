@@ -546,6 +546,7 @@ all_summary <- player_summary %>%
   mutate(game_score = ((0.75*goals) + (0.7*assists_prim) + (0.55*assists_sec) + (0.075*isog) + (0.1*ixg) + (0.05*cf) + (0.1*xgf) + (0.15*gf) - (0.05*ca) - (0.1*xga) - (0.15*xga)) / gp)
 
 # 5v5 #
+print("START OF RAPM")
 rapm_even <- rapm(pbp,"even")
 gc()
 rapm_even <- rapm_even %>%
