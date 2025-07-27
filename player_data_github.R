@@ -419,8 +419,10 @@ rapm <- function(pbp,game_strength){
   shifts_combined_dummies_def <- dummy_cols(shifts_combined_dummies_def, select_columns = c("defense_4"))
   shifts_combined_dummies_def <- dummy_cols(shifts_combined_dummies_def, select_columns = c("defense_5"))
   shifts_combined_dummies_def <- dummy_cols(shifts_combined_dummies_def, select_columns = c("defense_6"))
-  
+
+  print("Dummy cols done")
   shifts_combined_dummies_off = subset(shifts_combined_dummies_off, select = -c(offense_1,offense_2,offense_3,offense_4,offense_5,offense_6,defense_1,defense_2,defense_3,defense_4,defense_5,defense_6))
+  print("Dummies subset off done")
   shifts_combined_dummies_def = subset(shifts_combined_dummies_def, select = -c(offense_1,offense_2,offense_3,offense_4,offense_5,offense_6,defense_1,defense_2,defense_3,defense_4,defense_5,defense_6,shift_length,State_4v4,State_3v3,Up_1:Down_3,xGF_60,GF_60,CF_60,is_home))
   shifts_combined_dummies <- cbind(shifts_combined_dummies_off, shifts_combined_dummies_def)
   rm(shifts_subset,shifts_combined_dummies_off,shifts_combined_dummies_def,shifts_combined)
