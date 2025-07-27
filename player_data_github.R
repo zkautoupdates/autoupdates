@@ -417,6 +417,7 @@ rapm <- function(pbp,game_strength){
   print("Shifts_combined_dummies 5th column done")
   shifts_combined_dummies_off <- dummy_cols(shifts_combined_dummies_off, select_columns = c("offense_6"))
   print("Shifts_combined_dummies 6th column done")
+  gc()
   
   shifts_combined_dummies_def <- dummy_cols(shifts_subset, select_columns = c("defense_1"))
   print("Shifts_combined_dummies 1st column done")
