@@ -88,7 +88,12 @@ group_shifts <- function(pbp){
 }
 
 # RAPM EV #
-pbp <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_24_25.rds"))
+pbp_24_25 <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_24_25.rds"))
+pbp_23_24 <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_23_24.rds"))
+pbp_22_23 <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_22_23.rds"))
+pbp <- bind_rows(pbp_24_25,pbp_23_24,pbp_22_23)
+rm(pbp_24_25,pbp_23_24,pbp_22_23)
+gc()
 even_strength <- c("3v3", "4v4", "5v5")
 
 pbp <- pbp %>%
