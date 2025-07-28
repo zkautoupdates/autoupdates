@@ -1,0 +1,48 @@
+name: Update Player RAPM
+
+on:
+  # Allow manual trigger
+  workflow_dispatch:
+
+  # Scheduled trigger (e.g., daily at 3 AM EST / 8 AM UTC)
+  #schedule:
+  #  - cron: "0 8 * * *"
+
+permissions:
+  contents: write
+  
+jobs:
+  import-data:
+    runs-on: ubuntu-latest
+      
+    steps:
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: Install packages
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::tidyverse
+            any::glue
+            any::fastDummies
+            any::Matrix
+            any::glmnet
+            any::doParallel
+            any::foreach
+
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Import data
+        run: Rscript -e 'source("player_RAPM.R")'
+        
+      - name: Commit Results
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add data/player_rapm_24_25.rds
+          git commit -m 'Data updated' || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
