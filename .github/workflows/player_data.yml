@@ -25,11 +25,6 @@ jobs:
           packages: |
             any::tidyverse
             any::glue
-            any::fastDummies
-            any::Matrix
-            any::glmnet
-            any::doParallel
-            any::foreach
 
       - name: Check out repository
         uses: actions/checkout@v3
