@@ -5,6 +5,7 @@ library(Matrix)
 library(glmnet)
 library(doParallel)
 library(foreach)
+set.seed(88)
 
 # Functions #
 `%not_in%` <- Negate(`%in%`)
@@ -830,5 +831,6 @@ rm(joined_RAPM,cl,n_cores,defense_RAPM_xGA,defense_RAPM_GA,defense_RAPM_CA,joine
 gc()
 
 rapm_sh %>% saveRDS("data/player_rapm_sh_24_25.rds")
+
 
 
