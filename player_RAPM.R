@@ -5,7 +5,6 @@ library(Matrix)
 library(glmnet)
 library(doParallel)
 library(foreach)
-set.seed(88)
 
 # Functions #
 `%not_in%` <- Negate(`%in%`)
@@ -338,7 +337,7 @@ rapm_even %>% saveRDS("data/player_rapm_ev_24_25.rds")
 
 ## RAPM PP ##
 pbp <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_24_25.rds"))
-even_strength <- c("3v3", "4v4", "5v5")
+power_play <- c("5v4","5v3","4v3","6v4","6v3")
 
 pbp <- pbp %>%
   filter(period < 5)
@@ -389,7 +388,7 @@ pbp$home_xGF[is.na(pbp$home_xGF)] <- 0
 pbp$away_xGF[is.na(pbp$away_xGF)] <- 0
 pbp$event_length[is.na(pbp$event_length)] <- 0
 
-pbp_ev <- pbp %>% filter(strength_state %in% even_strength)
+pbp_ev <- pbp %>% filter(strength_state %in% power_play)
 rm(pbp)
 
 grouped_shifts <- pbp_ev %>%
@@ -586,7 +585,7 @@ rapm_pp %>% saveRDS("data/player_rapm_pp_24_25.rds")
 
 ## RAPM SH ##
 pbp <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_24_25.rds"))
-even_strength <- c("3v3", "4v4", "5v5")
+penalty_kill <- c("4v5","3v5","3v4","4v6","3v6")
 
 pbp <- pbp %>%
   filter(period < 5)
@@ -637,7 +636,7 @@ pbp$home_xGF[is.na(pbp$home_xGF)] <- 0
 pbp$away_xGF[is.na(pbp$away_xGF)] <- 0
 pbp$event_length[is.na(pbp$event_length)] <- 0
 
-pbp_ev <- pbp %>% filter(strength_state %in% even_strength)
+pbp_ev <- pbp %>% filter(strength_state %in% penalty_kill)
 rm(pbp)
 
 grouped_shifts <- pbp_ev %>%
@@ -831,6 +830,5 @@ rm(joined_RAPM,cl,n_cores,defense_RAPM_xGA,defense_RAPM_GA,defense_RAPM_CA,joine
 gc()
 
 rapm_sh %>% saveRDS("data/player_rapm_sh_24_25.rds")
-
 
 
