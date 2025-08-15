@@ -466,7 +466,7 @@ playernames <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw
 player_summary <- playernames %>% left_join(player_summary, by="playerID")
 player_summary <- na.omit(player_summary)
 player_stats_24_25 <- player_summary %>% arrange(desc(OVR))
-player_summary %>% saveRDS("data/player_stats_24_25.rds")
+player_stats_24_25 %>% saveRDS("data/player_stats_24_25.rds")
 
 # Goalies #
 goalie_games <- min(10,(length(unique(pbp$game_id))/16)/5)
@@ -482,6 +482,6 @@ playernames <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw
 goalie_summary <- playernames %>% left_join(goalie_summary, by="playerID")
 goalie_summary <- na.omit(goalie_summary)
 goalie_stats_24_25 <- goalie_summary %>% arrange(desc(GOA))
-goalie_summary %>% saveRDS("data/goalie_stats_24_25.rds")
+goalie_stats_24_25 %>% saveRDS("data/goalie_stats_24_25.rds")
 
 ################################################################################
