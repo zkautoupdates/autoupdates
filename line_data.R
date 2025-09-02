@@ -135,9 +135,9 @@ player_toi <- function(pbp){
 }
 `%not_in%` <- Negate(`%in%`)
 
-pbp <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_24_25.rds"))
+pbp <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_20_21.rds"))
 player_info <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/player_data.rds"))
-player_stats_24_25 <- readRDS(url("https://github.com/zkautoupdates/autoupdates/raw/main/data/player_stats_24_25.rds"))
+player_stats_20_21 <- readRDS(url("https://github.com/zkautoupdates/autoupdates/raw/main/data/player_stats_20_21.rds"))
 
 combos <- group_shifts(pbp)
 combos <- combos %>% filter(offense_players != "MISSING") %>% filter(defense_players != "MISSING") %>%
@@ -257,7 +257,7 @@ qot <- qot %>%
   group_by(player1,player2,player1_full_name,player2_full_name) %>%
   summarize(toi_together = sum(shift_length),.groups = "drop") %>%
   left_join(toi %>% select(playerID,player1_toi=toi_5v5),by=c("player1"="playerID")) %>%
-  left_join(player_stats_24_25 %>% select(playerID,teammate_OVR=OVR),by=c("player2"="playerID")) %>%
+  left_join(player_stats_20_21 %>% select(playerID,teammate_OVR=OVR),by=c("player2"="playerID")) %>%
   mutate(toi_together=toi_together/60, toi_perc=toi_together/player1_toi, teammate_strength=toi_perc*teammate_OVR) %>%
   drop_na(teammate_strength) %>%
   group_by(playerID=player1) %>%
@@ -288,7 +288,7 @@ qoc <- qoc %>%
   group_by(player1,player2,player1_full_name,player2_full_name) %>%
   summarize(toi_together = sum(shift_length),.groups = "drop") %>%
   left_join(toi %>% select(playerID,player1_toi=toi_5v5),by=c("player1"="playerID")) %>%
-  left_join(player_stats_24_25 %>% select(playerID,teammate_OVR=OVR),by=c("player2"="playerID")) %>%
+  left_join(player_stats_20_21 %>% select(playerID,teammate_OVR=OVR),by=c("player2"="playerID")) %>%
   mutate(toi_together=toi_together/60, toi_perc=toi_together/player1_toi, opp_strength=toi_perc*teammate_OVR) %>%
   drop_na(opp_strength) %>%
   group_by(playerID=player1) %>%
@@ -298,7 +298,8 @@ qoc <- qoc %>%
   arrange(-QOC)
 
 # Save data
-f_lines %>% saveRDS("data/f_lines_24_25.rds")
-d_pairs %>% saveRDS("data/d_pairs_24_25.rds")
+f_lines %>% saveRDS("data/f_lines_20_21.rds")
+d_pairs %>% saveRDS("data/d_pairs_20_21.rds")
 qotc <- left_join(qot,qoc,by="playerID")
-qotc %>% saveRDS("data/qotc_24_25.rds")
+qotc %>% saveRDS("data/qotc_20_21.rds")
+
