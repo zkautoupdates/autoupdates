@@ -88,7 +88,7 @@ group_shifts <- function(pbp){
 }
 
 # RAPM EV #
-pbp <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_24_25.rds"))
+pbp <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_25_26.rds"))
 even_strength <- c("3v3", "4v4", "5v5")
 
 pbp <- pbp %>%
@@ -333,10 +333,10 @@ rapm_even <- joined_RAPM %>% rename(playerID = Player)
 rm(joined_RAPM,cl,n_cores,defense_RAPM_xGA,defense_RAPM_GA,defense_RAPM_CA,joined_RAPM_G,joined_RAPM_C,joined_RAPM_xG,offense_RAPM_xGF,offense_RAPM_GF,offense_RAPM_CF,Binded_Coefficients_GF,Binded_Coefficients_CF,Binded_Coefficients_xGF,Cross_Validated_Results_GF,Cross_Validated_Results_CF,Cross_Validated_Results_xGF,RAPM_GF_coefficients,RAPM_CF_coefficients,RAPM_xGF_coefficients,Run_RAPM_xGF,Run_RAPM_GF,Run_RAPM_CF,Sparse_RAPM_xGF,even_strength,GF60,shift_length,xGF60,Sparse_RAPM_GF,Sparse_RAPM_CF,CF60)
 gc()
 
-rapm_even %>% saveRDS("data/player_rapm_ev_24_25.rds")
+rapm_even %>% saveRDS("data/player_rapm_ev_25_26.rds")
 
 ## RAPM PP ##
-pbp <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_24_25.rds"))
+pbp <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_25_26.rds"))
 power_play <- c("5v4","5v3","4v3","6v4","6v3")
 
 pbp <- pbp %>%
@@ -581,10 +581,10 @@ rapm_pp <- joined_RAPM %>% rename(playerID = Player)
 rm(joined_RAPM,cl,n_cores,defense_RAPM_xGA,defense_RAPM_GA,defense_RAPM_CA,joined_RAPM_G,joined_RAPM_C,joined_RAPM_xG,offense_RAPM_xGF,offense_RAPM_GF,offense_RAPM_CF,Binded_Coefficients_GF,Binded_Coefficients_CF,Binded_Coefficients_xGF,Cross_Validated_Results_GF,Cross_Validated_Results_CF,Cross_Validated_Results_xGF,RAPM_GF_coefficients,RAPM_CF_coefficients,RAPM_xGF_coefficients,Run_RAPM_xGF,Run_RAPM_GF,Run_RAPM_CF,Sparse_RAPM_xGF,even_strength,GF60,shift_length,xGF60,Sparse_RAPM_GF,Sparse_RAPM_CF,CF60)
 gc()
 
-rapm_pp %>% saveRDS("data/player_rapm_pp_24_25.rds")
+rapm_pp %>% saveRDS("data/player_rapm_pp_25_26.rds")
 
 ## RAPM SH ##
-pbp <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_24_25.rds"))
+pbp <- readRDS(url("https://github.com/zackkehl/HockeyZK_dataupdates/raw/main/data/pbp_25_26.rds"))
 penalty_kill <- c("4v5","3v5","3v4","4v6","3v6")
 
 pbp <- pbp %>%
@@ -829,6 +829,7 @@ rapm_sh <- joined_RAPM %>% rename(playerID = Player)
 rm(joined_RAPM,cl,n_cores,defense_RAPM_xGA,defense_RAPM_GA,defense_RAPM_CA,joined_RAPM_G,joined_RAPM_C,joined_RAPM_xG,offense_RAPM_xGF,offense_RAPM_GF,offense_RAPM_CF,Binded_Coefficients_GF,Binded_Coefficients_CF,Binded_Coefficients_xGF,Cross_Validated_Results_GF,Cross_Validated_Results_CF,Cross_Validated_Results_xGF,RAPM_GF_coefficients,RAPM_CF_coefficients,RAPM_xGF_coefficients,Run_RAPM_xGF,Run_RAPM_GF,Run_RAPM_CF,Sparse_RAPM_xGF,even_strength,GF60,shift_length,xGF60,Sparse_RAPM_GF,Sparse_RAPM_CF,CF60)
 gc()
 
-rapm_sh %>% saveRDS("data/player_rapm_sh_24_25.rds")
+rapm_sh %>% saveRDS("data/player_rapm_sh_25_26.rds")
+
 
 
