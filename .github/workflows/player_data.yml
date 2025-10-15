@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
 
   # Scheduled trigger (e.g., daily at 3 AM EST / 8 AM UTC)
-  #schedule:
-  #  - cron: "0 8 * * *"
+  schedule:
+    - cron: "0 10 * * *"
 
 permissions:
   contents: write
@@ -38,7 +38,7 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add data/player_stats_24_25.rds
-          git add data/goalie_stats_24_25.rds
+          git add data/player_stats_25_26.rds
+          git add data/goalie_stats_25_26.rds
           git commit -m 'Data updated' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
