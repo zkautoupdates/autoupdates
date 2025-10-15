@@ -143,6 +143,7 @@ combos <- group_shifts(pbp)
 combos <- combos %>% filter(offense_players != "MISSING") %>% filter(defense_players != "MISSING") %>%
   filter(strength_state == "5v5")
 combos$shift_change_index <- row_number(combos$shift_change_index)
+gc()
 toi <- player_toi(pbp)
 
 # F Lines #
@@ -302,5 +303,6 @@ f_lines %>% saveRDS("data/f_lines_25_26.rds")
 d_pairs %>% saveRDS("data/d_pairs_25_26.rds")
 qotc <- left_join(qot,qoc,by="playerID")
 qotc %>% saveRDS("data/qotc_25_26.rds")
+
 
 
