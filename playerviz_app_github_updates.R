@@ -2,7 +2,7 @@ library(tidyverse)
 library(glue)
 
 ## GET CURRENT SEASON DATA #####################################################
-current_season <- "25_26"
+current_season <- "26_27"
 
 player_toi <- function(pbp){
   power_play <- c("toi_5v4","toi_5v3","toi_4v3","toi_6v4","toi_6v3","toi_7v5")
